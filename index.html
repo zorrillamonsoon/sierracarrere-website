@@ -54,6 +54,10 @@
             color: var(--accent-teal);
         }
 
+        h1, h2 {
+            text-transform: uppercase;
+        }
+
         img {
             max-width: 100%;
             height: auto;
@@ -302,76 +306,30 @@
             text-decoration: underline;
         }
 
-        .contact-cta {
+        .contact-intro {
             color: var(--text-gray);
-            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.7;
         }
 
-        .contact-form {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 1rem;
-            background-color: var(--bg-light);
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            color: var(--text-dark);
-            font-family: var(--font-primary);
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--accent-teal);
-        }
-
-        .form-input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .form-textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .form-checkbox {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            text-align: left;
-            color: var(--text-gray);
-            font-size: 0.9rem;
-        }
-
-        .form-checkbox input {
-            margin-top: 4px;
-            accent-color: var(--accent-teal);
-        }
-
-        .form-button {
+        .contact-button {
+            display: inline-block;
+            margin-top: 1.5rem;
             padding: 1rem 3rem;
             background-color: var(--accent-teal);
             color: #ffffff;
-            border: none;
             border-radius: 4px;
-            font-family: var(--font-primary);
             font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
-        .form-button:hover {
+        .contact-button:hover {
             background-color: var(--accent-teal-hover);
+            color: #ffffff;
         }
 
         /* Footer */
@@ -568,28 +526,10 @@
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
+            <h2 class="section-title">Let's Connect</h2>
+            <p class="contact-intro">Whether you're looking to transform your space, find your dream home, or collaborate on a creative project — I'd love to hear from you.</p>
             <p class="contact-email"><a href="mailto:SierraCarrere@gmail.com">SierraCarrere@gmail.com</a></p>
-            <p class="contact-cta">Send me a message.</p>
-
-            <form class="contact-form" id="contact-form">
-                <div class="form-group">
-                    <input type="text" name="name" class="form-input" placeholder="Name" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" name="email" class="form-input" placeholder="Email*" required>
-                </div>
-                <div class="form-group">
-                    <textarea name="message" class="form-input form-textarea" placeholder="Your message..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="form-checkbox">
-                        <input type="checkbox" name="subscribe">
-                        <span>Sign up for our email list for updates, promotions, and more.</span>
-                    </label>
-                </div>
-                <button type="submit" class="form-button">Send</button>
-            </form>
+            <a href="mailto:SierraCarrere@gmail.com" class="contact-button">Say Hello</a>
         </div>
     </section>
 
@@ -655,29 +595,6 @@
             });
         });
 
-        // Form handling
-        const contactForm = document.getElementById('contact-form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const submitButton = contactForm.querySelector('button[type="submit"]');
-                const originalText = submitButton.textContent;
-
-                submitButton.textContent = 'Sending...';
-                submitButton.disabled = true;
-
-                // Simulate form submission - replace with actual backend
-                setTimeout(() => {
-                    submitButton.textContent = 'Sent!';
-                    contactForm.reset();
-
-                    setTimeout(() => {
-                        submitButton.textContent = originalText;
-                        submitButton.disabled = false;
-                    }, 3000);
-                }, 1500);
-            });
-        }
     </script>
 </body>
 </html>
