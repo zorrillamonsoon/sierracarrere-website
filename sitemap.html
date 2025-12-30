@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Map - Sierra Carrere</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent-teal: #008B8B;
+            --charcoal: #333;
+            --text-gray: #666;
+            --navy: #1a2744;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: #fafafa;
+            color: var(--charcoal);
+            padding: 60px 40px;
+            min-height: 100vh;
+        }
+
+        .sitemap-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .sitemap-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .sitemap-header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            color: var(--charcoal);
+        }
+
+        .sitemap-header p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+        }
+
+        /* Tree structure */
+        .tree {
+            position: relative;
+        }
+
+        .tree-root {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .node {
+            display: inline-block;
+            padding: 20px 40px;
+            background: #fff;
+            border: 2px solid #eee;
+            text-decoration: none;
+            color: var(--charcoal);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .node:hover {
+            border-color: var(--accent-teal);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .node.root {
+            background: var(--accent-teal);
+            color: #fff;
+            border-color: var(--accent-teal);
+            padding: 25px 50px;
+        }
+
+        .node.root:hover {
+            background: #007777;
+            transform: translateY(-3px);
+        }
+
+        .node h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.25rem;
+        }
+
+        .node p {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            margin: 0;
+        }
+
+        .node.root p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Connector lines */
+        .connector {
+            width: 2px;
+            height: 40px;
+            background: var(--accent-teal);
+            margin: 0 auto;
+        }
+
+        /* Branches */
+        .branches {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .branch {
+            position: relative;
+        }
+
+        .branch::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            width: 2px;
+            height: 20px;
+            background: var(--accent-teal);
+        }
+
+        .branch-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: var(--accent-teal);
+            margin-bottom: 15px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .branch-nodes {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .branch-node {
+            display: block;
+            padding: 15px 20px;
+            background: #fff;
+            border: 1px solid #eee;
+            text-decoration: none;
+            color: var(--charcoal);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .branch-node::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--accent-teal);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .branch-node:hover {
+            border-color: var(--accent-teal);
+            padding-left: 25px;
+        }
+
+        .branch-node:hover::before {
+            transform: scaleY(1);
+        }
+
+        .branch-node h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.25rem;
+        }
+
+        .branch-node p {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            margin: 0;
+        }
+
+        .branch-node.external {
+            background: #f8f8f8;
+            border-style: dashed;
+        }
+
+        .branch-node.external::after {
+            content: ' ↗';
+            font-size: 0.7rem;
+        }
+
+        /* Sub-branch */
+        .sub-branch {
+            margin-left: 20px;
+            padding-left: 20px;
+            border-left: 2px solid #eee;
+            margin-top: 15px;
+        }
+
+        .sub-branch .branch-node {
+            font-size: 0.9rem;
+            padding: 12px 15px;
+        }
+
+        /* Legend */
+        .legend {
+            margin-top: 60px;
+            padding: 30px;
+            background: #fff;
+            border: 1px solid #eee;
+        }
+
+        .legend h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            color: var(--charcoal);
+        }
+
+        .legend-items {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border: 2px solid;
+        }
+
+        .legend-color.teal {
+            background: var(--accent-teal);
+            border-color: var(--accent-teal);
+        }
+
+        .legend-color.white {
+            background: #fff;
+            border-color: #eee;
+        }
+
+        .legend-color.dashed {
+            background: #f8f8f8;
+            border-color: #ccc;
+            border-style: dashed;
+        }
+
+        /* Footer */
+        .sitemap-footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .sitemap-footer a {
+            color: var(--accent-teal);
+            text-decoration: none;
+        }
+
+        .sitemap-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 30px 20px;
+            }
+
+            .branches {
+                grid-template-columns: 1fr;
+            }
+
+            .sitemap-header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sitemap-container">
+        <header class="sitemap-header">
+            <h1>SITE MAP</h1>
+            <p>Sierra Carrere Website Structure</p>
+        </header>
+
+        <!-- Tree Structure -->
+        <div class="tree">
+            <!-- Root Node -->
+            <div class="tree-root">
+                <a href="index.html" class="node root">
+                    <h3>SIERRA CARRERE PORTAL</h3>
+                    <p>Main Portfolio Hub</p>
+                </a>
+                <div class="connector"></div>
+            </div>
+
+            <!-- Branches -->
+            <div class="branches">
+                <!-- Sierra Poppins Branch -->
+                <div class="branch">
+                    <div class="branch-title">Sierra Poppins</div>
+                    <div class="branch-nodes">
+                        <a href="sierrapoppins-home.html" class="branch-node">
+                            <h4>Home</h4>
+                            <p>Organizing business main page</p>
+                        </a>
+                        <div class="sub-branch">
+                            <a href="services.html" class="branch-node">
+                                <h4>Services</h4>
+                                <p>Packages & pricing</p>
+                            </a>
+                            <a href="about.html" class="branch-node">
+                                <h4>About</h4>
+                                <p>Meet Sierra</p>
+                            </a>
+                            <a href="contact.html" class="branch-node">
+                                <h4>Contact</h4>
+                                <p>Get in touch</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Music & Performance Branch -->
+                <div class="branch">
+                    <div class="branch-title">Music & Performance</div>
+                    <div class="branch-nodes">
+                        <a href="music.html" class="branch-node">
+                            <h4>Music Page</h4>
+                            <p>Streaming & videos</p>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- External Properties Branch -->
+                <div class="branch">
+                    <div class="branch-title">External</div>
+                    <div class="branch-nodes">
+                        <a href="https://amazonaloha.com/" target="_blank" class="branch-node external">
+                            <h4>Amazon Aloha Designs</h4>
+                            <p>Shopify store</p>
+                        </a>
+                        <div class="branch-node external" style="cursor: default;">
+                            <h4>Real Estate</h4>
+                            <p>Coming soon</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <h4>LEGEND</h4>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="legend-color teal"></div>
+                    <span>Portal (main entry)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color white"></div>
+                    <span>Internal page</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color dashed"></div>
+                    <span>External link</span>
+                </div>
+            </div>
+        </div>
+
+        <footer class="sitemap-footer">
+            <p>&copy; 2025 Sierra Carrere | <a href="index.html">Return to Portal</a></p>
+        </footer>
+    </div>
+</body>
+</html>

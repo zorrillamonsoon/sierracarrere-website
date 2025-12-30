@@ -134,14 +134,14 @@ if (lazyImages.length > 0) {
     lazyImages.forEach(img => imageObserver.observe(img));
 }
 
-// Add animation on scroll
+// Add animation on scroll (legacy)
 const animateOnScroll = () => {
     const elements = document.querySelectorAll('.animate-on-scroll');
-    
+
     elements.forEach(element => {
         const elementTop = element.getBoundingClientRect().top;
         const elementBottom = element.getBoundingClientRect().bottom;
-        
+
         if (elementTop < window.innerHeight && elementBottom > 0) {
             element.classList.add('animated');
         }
@@ -150,3 +150,27 @@ const animateOnScroll = () => {
 
 window.addEventListener('scroll', animateOnScroll);
 window.addEventListener('load', animateOnScroll);
+
+// Scroll reveal animations (modern IntersectionObserver)
+const initScrollReveal = () => {
+    const revealElements = document.querySelectorAll('.reveal, .reveal-left');
+
+    if (revealElements.length === 0) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Optionally unobserve after reveal
+                // observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => observer.observe(el));
+};
+
+document.addEventListener('DOMContentLoaded', initScrollReveal);

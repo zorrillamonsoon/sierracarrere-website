@@ -142,14 +142,26 @@
             padding: 2rem;
         }
 
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .hero-tagline {
             font-family: 'Cinzel', serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 400;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             margin-bottom: 1.5rem;
             color: var(--text-dark);
             text-transform: none;
+            animation: fadeInUp 0.8s ease-out;
         }
 
         .hero-subtitle {
@@ -173,26 +185,33 @@
 
         .business-card {
             background-color: var(--bg-light);
-            border: 1px solid #eee;
-            border-radius: 8px;
+            border: none;
+            border-radius: 0;
             overflow: hidden;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
         }
 
         .business-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--accent-teal);
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
         }
 
         .business-images {
             display: flex;
             width: 100%;
+            overflow: hidden;
         }
 
         .business-images img {
             width: 50%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .business-card:hover .business-images img {
+            transform: scale(1.05);
         }
 
         .business-images img.full-width {
@@ -227,18 +246,20 @@
         .business-link {
             display: inline-block;
             margin-top: 1.5rem;
-            padding: 0.75rem 2rem;
-            background-color: var(--accent-teal);
-            color: #ffffff;
-            border-radius: 4px;
-            font-size: 0.85rem;
+            padding: 0.75rem 2.5rem;
+            background-color: transparent;
+            color: var(--accent-teal);
+            border: 2px solid var(--accent-teal);
+            border-radius: 0;
+            font-size: 0.8rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: background-color 0.3s ease;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
         }
 
         .business-link:hover {
-            background-color: var(--accent-teal-hover);
+            background-color: var(--accent-teal);
             color: #ffffff;
         }
 
@@ -264,9 +285,15 @@
         }
 
         .testimonial-card {
-            background-color: var(--bg-soft);
-            padding: 2.5rem;
-            border-radius: 8px;
+            background-color: #fafafa;
+            padding: 2.5rem 3rem;
+            border-radius: 0;
+            border-left: 3px solid var(--accent-teal);
+            transition: transform 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateX(5px);
         }
 
         .testimonial-text {
@@ -289,8 +316,8 @@
 
         /* Contact Section */
         .contact {
-            padding: 5rem 0;
-            background-color: var(--bg-accent);
+            padding: 6rem 0;
+            background-color: #fff;
             text-align: center;
         }
 
@@ -320,26 +347,40 @@
         .contact-button {
             display: inline-block;
             margin-top: 1.5rem;
-            padding: 1rem 3rem;
-            background-color: var(--accent-teal);
-            color: #ffffff;
-            border-radius: 4px;
-            font-size: 1rem;
+            padding: 1rem 3.5rem;
+            background-color: transparent;
+            color: var(--accent-teal);
+            border: 2px solid var(--accent-teal);
+            border-radius: 0;
+            font-size: 0.9rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: background-color 0.3s ease;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
         }
 
         .contact-button:hover {
-            background-color: var(--accent-teal-hover);
+            background-color: var(--accent-teal);
             color: #ffffff;
         }
 
         /* Footer */
         .footer {
             padding: 3rem 0;
-            background-color: var(--bg-soft);
+            background-color: #1a1a1a;
             text-align: center;
+        }
+
+        .footer .copyright {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer .social-link {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer .social-link:hover {
+            color: var(--accent-teal);
         }
 
         .social-links {
@@ -445,7 +486,6 @@
     <section class="hero" id="home">
         <div class="hero-content">
             <h1 class="hero-tagline">Multi-Faceted Creative Entrepreneur</h1>
-            <p class="hero-subtitle">Real Estate · Home Organization · Wearable Art · Performance</p>
         </div>
     </section>
 
