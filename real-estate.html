@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sierra Carrère Real Estate - Your trusted partner in finding the perfect home. Personalized service with a creative touch.">
+    <meta name="keywords" content="Sierra Carrere, real estate, realtor, home buying, home selling, property">
+    <title>Sierra Carrère - Real Estate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-light: #ffffff;
+            --bg-soft: #f8f8f8;
+            --text-dark: #2c2c2c;
+            --text-gray: #555555;
+            --text-muted: #888888;
+            --accent-teal: #008B8B;
+            --accent-teal-hover: #006d6d;
+            --font-primary: 'Crimson Pro', serif;
+            --font-display: 'Cinzel', serif;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        a {
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-teal);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Portal Bar */
+        .portal-bar {
+            background-color: #1a2744;
+            padding: 0.5rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
+        }
+
+        .portal-bar .container {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .portal-back-link {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .portal-back-link:hover {
+            color: var(--accent-teal);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 32px;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #eee;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .nav-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .nav-logo a {
+            color: var(--accent-teal);
+        }
+
+        .nav-back {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-back:hover {
+            color: var(--accent-teal);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(248, 248, 248, 0.95)),
+                        url('images/sierra-carrere-hero.jpg') center/cover no-repeat;
+            padding-top: 140px;
+            padding-bottom: 60px;
+        }
+
+        .hero-content {
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-tagline {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 400;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background-color: var(--bg-light);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.03);
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            text-transform: uppercase;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text .highlight {
+            color: var(--accent-teal);
+            font-weight: 500;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            background-color: var(--bg-soft);
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            letter-spacing: 2px;
+            color: var(--text-dark);
+            text-transform: uppercase;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: #fff;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            border: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-teal);
+            box-shadow: 0 10px 30px rgba(0, 139, 139, 0.1);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+            letter-spacing: 1px;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Contact CTA Section */
+        .contact-cta {
+            padding: 6rem 0;
+            background-color: var(--bg-light);
+            text-align: center;
+        }
+
+        .contact-cta p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+
+        .contact-email {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-email a {
+            color: var(--accent-teal);
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 1rem 3.5rem;
+            background-color: transparent;
+            color: var(--accent-teal);
+            border: 2px solid var(--accent-teal);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-button:hover {
+            background-color: var(--accent-teal);
+            color: #ffffff;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 0;
+            background-color: #1a1a1a;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--accent-teal);
+        }
+
+        .social-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-image {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                top: 32px;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .social-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Portal Bar -->
+    <div class="portal-bar">
+        <div class="container">
+            <a href="index.html" class="portal-back-link">&larr; Back to Sierra Carrère Portal</a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="real-estate.html">Sierra Carrère</a>
+            </div>
+            <a href="index.html" class="nav-back">&larr; Back to Home</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-tagline">Real Estate</h1>
+            <p class="hero-subtitle">Finding Your Perfect Space with a Personal Touch</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="images/sierra-carrere-hero.jpg" alt="Sierra Carrère - Real Estate Agent">
+                </div>
+                <div class="about-text">
+                    <h2>Your Home, Your Story</h2>
+                    <p>
+                        As a <span class="highlight">multi-faceted creative entrepreneur</span>, I bring a unique perspective to real estate.
+                        Whether you're buying your first home, selling a cherished property, or searching for that perfect investment,
+                        I understand that every space tells a story.
+                    </p>
+                    <p>
+                        My background in home organization and design gives me an eye for potential that others might miss.
+                        I don't just see houses — I see the life you'll build within them. Let me help you find a space
+                        that truly feels like home.
+                    </p>
+                    <p>
+                        Based in <span class="highlight">New Orleans</span> and ready to help you navigate the exciting journey of real estate.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">How I Can Help</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🏠</div>
+                    <h3>Buying</h3>
+                    <p>Find your dream home with personalized guidance through every step of the buying process.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔑</div>
+                    <h3>Selling</h3>
+                    <p>Showcase your property's best features and connect with the right buyers for a smooth sale.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">✨</div>
+                    <h3>Staging & Vision</h3>
+                    <p>Leverage my design expertise to help buyers see the full potential of any space.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA Section -->
+    <section class="contact-cta">
+        <div class="container">
+            <h2 class="section-title">Let's Find Your Space</h2>
+            <p>Ready to start your real estate journey? I'd love to hear about your goals and how I can help make them a reality.</p>
+            <p class="contact-email"><a href="mailto:SierraCarrere@gmail.com">SierraCarrere@gmail.com</a></p>
+            <a href="mailto:SierraCarrere@gmail.com" class="contact-button">Get In Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://facebook.com/sierracarrere" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                    </svg>
+                    Facebook
+                </a>
+                <a href="https://instagram.com/sierracarrere" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    </svg>
+                    Instagram
+                </a>
+                <a href="https://youtube.com/@sierracarrere" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z"/>
+                        <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#1a1a1a"/>
+                    </svg>
+                    YouTube
+                </a>
+            </div>
+            <p class="copyright">Copyright &copy; 2025 Sierra Carrère - All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
